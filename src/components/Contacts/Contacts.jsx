@@ -1,14 +1,19 @@
 import PropTypes from 'prop-types';
 import css from './Contacts.module.css';
 import { useSelector } from 'react-redux';
-import { getContactsList } from 'components/redux/contacts/selectors';
+import {
+  getContactsList,
+  getFilter,
+} from 'components/redux/contacts/selectors';
 import { deleteContact } from 'components/redux/contacts/actions';
 import { useDispatch } from 'react-redux';
 
 const Contacts = () => {
   useSelector(state => console.log(state));
   const contactsList = useSelector(getContactsList);
-  console.log(contactsList.contacts);
+  const filter = useSelector(getFilter);
+
+  console.log(contactsList);
 
   const dispatch = useDispatch();
 
@@ -19,7 +24,7 @@ const Contacts = () => {
 
   return (
     <ul className={css.list}>
-      {contactsList.contacts?.map(({ id, name, number }) => (
+      {contactsList.map(({ id, name, number }) => (
         <li key={id} className={css.list_item}>
           {name}: {number}{' '}
           <button

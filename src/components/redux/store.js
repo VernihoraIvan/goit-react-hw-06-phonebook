@@ -1,9 +1,9 @@
 import { createStore } from 'redux';
 import { devToolsEnhancer } from '@redux-devtools/extension';
-import appReducers from './reducers';
+import appReducer from './reducers';
 
 const enhancer = devToolsEnhancer();
-export const store = createStore(appReducers, enhancer);
+export const store = createStore(appReducer, enhancer);
 
 // import { deleteContact } from './contacts/actions';
 // import { addContact } from './contacts/actions';

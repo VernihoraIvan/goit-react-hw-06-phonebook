@@ -20,6 +20,7 @@ const ContactForm = ({ onSubmit }) => {
   const saveContactHandler = event => {
     event.preventDefault();
     const contactName = contactNameRef.current.value;
+    console.log(contactNameRef);
     const contactNumber = Number(contactNumberRef.current.value);
     dispatch(
       addContact({ name: contactName, number: contactNumber, id: nanoid() })
