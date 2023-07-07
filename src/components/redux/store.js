@@ -1,10 +1,40 @@
-import { createStore } from 'redux';
-import { devToolsEnhancer } from '@redux-devtools/extension';
-import appReducer from './reducers';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { addContactReducer, deleteContactReducer } from './contacts/reducer';
+import { contactsReducer } from './contacts/slice';
 
-const enhancer = devToolsEnhancer();
-export const store = createStore(appReducer, enhancer);
+export const store = configureStore({
+  reducer: {
+    contacts: contactsReducer,
+  },
+});
 
+// export const store = configureStore({
+//   reducer: {
+//     contacts: combineReducers({
+//       add: addContactReducer,
+//       delete: deleteContactReducer,
+//     }),
+//   },
+// });
+
+// export const store = configureStore({
+//   reducer: {
+//     contacts: combineReducers({
+//       contactsList: addContactReducer,
+//       deletedContacts: deleteContactReducer,
+//     }),
+//   },
+// });
+
+// import appReducers from './reducers';
+
+//////////////////////////////////////////
+// import { createStore } from 'redux';
+// import { devToolsEnhancer } from '@redux-devtools/extension';
+
+// const enhancer = devToolsEnhancer();
+// export const store = createStore(appReducers, enhancer);
+/////////////////////////////////////////////////////////////////////////
 // import { deleteContact } from './contacts/actions';
 // import { addContact } from './contacts/actions';
 // const initialState = {
@@ -36,3 +66,5 @@ export const store = createStore(appReducer, enhancer);
 //       return state;
 //   }
 // };
+
+/////////////////////////////////////////////////////////////////////////

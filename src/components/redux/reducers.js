@@ -1,12 +1,12 @@
-import { combineReducers } from 'redux';
-import { contactsReducer } from './contacts/reducer';
+// import { combineReducers } from 'redux';
+// import { contactsReducer } from './contacts/reducer';
 
-const appReducer = combineReducers({
-  contacts: contactsReducer,
-});
+// const appReducers = combineReducers({
+//   contacts: contactsReducer,
+// });
 
 // export default (state, action) => {
-//   return appReducer(state, action);
+//   return appReducers(state, action);
 // };
 
-export default appReducer;
+// export default appReducers;

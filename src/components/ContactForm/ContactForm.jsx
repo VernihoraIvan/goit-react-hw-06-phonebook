@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getContactsList } from 'components/redux/contacts/selectors';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'components/redux/contacts/actions';
+import { addContact } from 'components/redux/contacts/slice';
 import css from './ContactForm.module.css';
 import { nanoid } from 'nanoid';
 
@@ -11,7 +11,6 @@ const ContactForm = ({ onSubmit }) => {
   // const [number, setNumber] = useState('');
 
   const contactsList = useSelector(getContactsList);
-  console.log(contactsList);
   const dispatch = useDispatch();
 
   const contactNameRef = useRef();

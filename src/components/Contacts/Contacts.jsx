@@ -5,13 +5,13 @@ import {
   getContactsList,
   getFilter,
 } from 'components/redux/contacts/selectors';
-import { deleteContact } from 'components/redux/contacts/actions';
+import { deleteContact } from 'components/redux/contacts/slice';
 import { useDispatch } from 'react-redux';
 
 const Contacts = () => {
   useSelector(state => console.log(state));
-  const contactsList = useSelector(getContactsList);
-  const filter = useSelector(getFilter);
+  const contactsList = useSelector(state => state.contacts);
+  // const filter = useSelector(getFilter);
 
   console.log(contactsList);
 
@@ -19,12 +19,13 @@ const Contacts = () => {
 
   const onDelete = id => {
     console.log(id);
+    console.log(contactsList);
     dispatch(deleteContact(id));
   };
 
   return (
     <ul className={css.list}>
-      {contactsList.map(({ id, name, number }) => (
+      {contactsList?.map(({ id, name, number }) => (
         <li key={id} className={css.list_item}>
           {name}: {number}{' '}
           <button
