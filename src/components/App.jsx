@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Contacts from './Contacts/Contacts';
 import ContactForm from './ContactForm/ContactForm';
 import Section from './Section/Section';
@@ -7,12 +6,9 @@ import FilterInput from './FilterInput/FilterInput';
 import { nanoid } from 'nanoid';
 import css from './App.module.css';
 
-const localStorageKey = 'contacts';
-
 export const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem(localStorageKey)) ?? [];
-  });
+  const [contacts, setContacts] = useState([]);
+
   const [filter, setFilter] = useState('');
 
   const deleteContact = contactId => {
@@ -45,17 +41,6 @@ export const App = () => {
     return filteredContacts;
   };
 
-  useEffect(() => {
-    const savedContacts = localStorage.getItem(localStorageKey);
-    if (savedContacts) {
-      setContacts(JSON.parse(savedContacts));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify(contacts));
-  }, [contacts]);
-
   const filteredContacts = filteredList();
   return (
     <div
@@ -78,14 +63,4 @@ export const App = () => {
       </Section>
     </div>
   );
-};
-
-App.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
 };

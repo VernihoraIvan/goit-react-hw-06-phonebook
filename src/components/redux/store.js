@@ -18,7 +18,6 @@ const persistConfig = {
   storage,
   whitelist: ['contacts'],
 };
-console.log(storage);
 const persistedContactsReducer = persistReducer(persistConfig, contactsReducer);
 
 export const store = configureStore({

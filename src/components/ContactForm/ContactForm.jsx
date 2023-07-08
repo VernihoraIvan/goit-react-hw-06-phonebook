@@ -17,8 +17,6 @@ const ContactForm = () => {
     event.preventDefault();
     const contactName = contactNameRef.current.value;
     const contactNumber = Number(contactNumberRef.current.value);
-    console.log(contactNumber);
-    console.log(typeof NaN);
     const isExistingContact = contactsList.find(
       contact => contact.name.toLowerCase() === contactName.toLowerCase()
     );
