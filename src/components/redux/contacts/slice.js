@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = [];
-// {
+const initialState = {
+  contacts: [],
+  filter: '',
+}; // {
 //   contacts: [
 //     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
 //     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -16,14 +18,19 @@ const contactsSlice = createSlice({
   initialState,
   reducers: {
     addContact(state, action) {
-      state.push(action.payload);
+      //   return [...state, action.payload];
+      state.contacts.push(action.payload);
     },
+
     deleteContact(state, action) {
-      return state.filter(contact => contact.id !== action.payload);
+      state.contacts = state.contacts.filter(
+        contact => contact.id !== action.payload
+      );
     },
+
     filterContact(state, action) {
       //   return state.filter(contact => contact === action.payload);
-      return state.filter(({ name }) =>
+      state.contacts = state.contacts.filter(({ name }) =>
         name.toLowerCase().includes(action.payload.toLowerCase())
       );
     },

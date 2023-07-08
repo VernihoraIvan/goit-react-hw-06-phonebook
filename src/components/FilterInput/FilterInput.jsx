@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { filterContact } from 'components/redux/contacts/slice';
 
 const FilterInput = () => {
-  const filteredList = useSelector(state => state.contacts);
+  const filteredList = useSelector(state => state.contacts.filter);
   const inputRef = useRef();
   const dispatch = useDispatch();
   const onChange = () => {

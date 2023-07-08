@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 
 const Contacts = () => {
   useSelector(state => console.log(state));
-  const contactsList = useSelector(state => state.contacts);
+  const contactsList = useSelector(state => state.contacts.contacts);
   // const filter = useSelector(getFilter);
 
   console.log(contactsList);
