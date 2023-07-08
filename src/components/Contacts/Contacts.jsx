@@ -10,16 +10,19 @@ import { useDispatch } from 'react-redux';
 
 const Contacts = () => {
   const contactsList = useSelector(getContactsList);
-
+  const filteredContactsList = useSelector(getFilter);
+  console.log(filteredContactsList);
   const dispatch = useDispatch();
-
+  const contactListToRender = filteredContactsList
+    ? filteredContactsList
+    : contactsList;
   const onDelete = id => {
     dispatch(deleteContact(id));
   };
 
   return (
     <ul className={css.list}>
-      {contactsList?.map(({ id, name, number }) => (
+      {contactListToRender?.map(({ id, name, number }) => (
         <li key={id} className={css.list_item}>
           {name}: {number}{' '}
           <button
