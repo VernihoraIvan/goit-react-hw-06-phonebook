@@ -3,9 +3,10 @@ import css from './FilterInput.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef } from 'react';
 import { filterContact } from 'components/redux/contacts/slice';
+import { getFilter } from 'components/redux/contacts/selectors';
 
 const FilterInput = () => {
-  const filteredList = useSelector(state => state.contacts.filter);
+  const filteredList = useSelector(getFilter);
   const inputRef = useRef();
   const dispatch = useDispatch();
   const onChange = () => {
@@ -20,7 +21,6 @@ const FilterInput = () => {
         ref={inputRef}
         className={css.input}
         type="text"
-        // value={value}
         onChange={onChange}
         placeholder="search..."
       />

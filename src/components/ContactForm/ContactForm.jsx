@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { getContactsList } from 'components/redux/contacts/selectors';
 import { useDispatch } from 'react-redux';
@@ -6,10 +6,7 @@ import { addContact } from 'components/redux/contacts/slice';
 import css from './ContactForm.module.css';
 import { nanoid } from 'nanoid';
 
-const ContactForm = ({ onSubmit }) => {
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
-
+const ContactForm = () => {
   const contactsList = useSelector(getContactsList);
   const dispatch = useDispatch();
 
@@ -19,40 +16,33 @@ const ContactForm = ({ onSubmit }) => {
   const saveContactHandler = event => {
     event.preventDefault();
     const contactName = contactNameRef.current.value;
-    console.log(contactNameRef);
     const contactNumber = Number(contactNumberRef.current.value);
+    console.log(contactNumber);
+    console.log(typeof NaN);
+    const isExistingContact = contactsList.find(
+      contact => contact.name.toLowerCase() === contactName.toLowerCase()
+    );
+    if (isExistingContact) {
+      alert(`Person already in contacts`);
+      return;
+    }
+    if (!contactName) {
+      alert('Please write a name');
+    }
+    if (!contactNumber) {
+      alert(`Please write a number`);
+      return;
+    }
+    if (typeof contactNumber !== 'number') {
+      alert(`Please write a number`);
+      return;
+    }
     dispatch(
       addContact({ name: contactName, number: contactNumber, id: nanoid() })
     );
+    contactNameRef.current.value = '';
+    contactNumberRef.current.value = '';
   };
-  // const onAdd = () => {
-  //   console.log(name);
-  //   dispatch(addContact({ name, number }));
-  // };
-
-  // const handleSubmit = event => {
-  //   event.preventDefault();
-
-  //   if (name !== '' && number !== '') {
-  //     const newContact = { name, number };
-  //     onSubmit(newContact);
-  //   }
-  //   reset();
-  // };
-
-  // const reset = () => {
-  //   setName('');
-  //   setNumber('');
-  // };
-
-  // const handleChange = event => {
-  //   const { name, value } = event.target;
-  //   if (name === 'name') {
-  //     setName(value);
-  //   } else if (name === 'number') {
-  //     setNumber(value);
-  //   }
-  // };
 
   return (
     <form onSubmit={saveContactHandler}>
@@ -62,8 +52,6 @@ const ContactForm = ({ onSubmit }) => {
       <input
         ref={contactNameRef}
         className={css.input}
-        // value={name}
-        // onChange={handleChange}
         id="name"
         type="text"
         name="name"
@@ -77,8 +65,6 @@ const ContactForm = ({ onSubmit }) => {
       <input
         ref={contactNumberRef}
         className={css.input}
-        // value={number}
-        // onChange={handleChange}
         id="tel"
         type="tel"
         name="number"

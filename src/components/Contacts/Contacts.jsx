@@ -9,17 +9,11 @@ import { deleteContact } from 'components/redux/contacts/slice';
 import { useDispatch } from 'react-redux';
 
 const Contacts = () => {
-  useSelector(state => console.log(state));
-  const contactsList = useSelector(state => state.contacts.contacts);
-  // const filter = useSelector(getFilter);
-
-  console.log(contactsList);
+  const contactsList = useSelector(getContactsList);
 
   const dispatch = useDispatch();
 
   const onDelete = id => {
-    console.log(id);
-    console.log(contactsList);
     dispatch(deleteContact(id));
   };
 
@@ -31,7 +25,6 @@ const Contacts = () => {
           <button
             className={css.button}
             type="button"
-            // onClick={() => onDeleteContact(id)}
             onClick={() => onDelete(id)}
           >
             Delete
