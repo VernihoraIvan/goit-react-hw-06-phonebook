@@ -1,7 +1,7 @@
 import css from './FilterInput.module.css';
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
-import { filterContact } from 'components/redux/contacts/slice';
+import { filterContact } from '../../redux/contacts/slice';
 
 const FilterInput = () => {
   const inputRef = useRef();

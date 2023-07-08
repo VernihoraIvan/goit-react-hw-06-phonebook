@@ -1,47 +1,10 @@
-import { useState } from 'react';
 import Contacts from './Contacts/Contacts';
 import ContactForm from './ContactForm/ContactForm';
 import Section from './Section/Section';
 import FilterInput from './FilterInput/FilterInput';
-import { nanoid } from 'nanoid';
 import css from './App.module.css';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
-
-  const [filter, setFilter] = useState('');
-
-  const deleteContact = contactId => {
-    setContacts(state => state.filter(contact => contact.id !== contactId));
-  };
-
-  const handleFilter = event => {
-    setFilter(event.target.value);
-  };
-
-  const handleAddContact = ({ name, number }) => {
-    const isExistingContact = contacts.find(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
-    );
-
-    if (isExistingContact) {
-      alert(`${name} is already in contacts`);
-      return;
-    }
-    setContacts(state => [
-      ...state,
-      { name: name, number: number, id: nanoid() },
-    ]);
-    return;
-  };
-  const filteredList = () => {
-    const filteredContacts = contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
-    );
-    return filteredContacts;
-  };
-
-  const filteredContacts = filteredList();
   return (
     <div
       className={css.container}
@@ -55,11 +18,11 @@ export const App = () => {
       }}
     >
       <Section title="Phonebook">
-        <ContactForm onSubmit={handleAddContact} />
+        <ContactForm />
       </Section>
       <Section title="Contacts">
-        <FilterInput value={filter} handleFilter={handleFilter} />
-        <Contacts contacts={filteredContacts} onDeleteContact={deleteContact} />
+        <FilterInput />
+        <Contacts />
       </Section>
     </div>
   );
